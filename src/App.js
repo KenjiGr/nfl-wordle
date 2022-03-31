@@ -7,10 +7,12 @@ function App() {
 
   const [player, setPlayer] = useState([])
   const [error, setError] = useState([])
+  // const [playerId, setPlayerId] = useState([])
   let key = '841c2605c6da4040a45c4de11797f56b';
 
   const handleClick = () => {
-    axios.get(`https://api.sportsdata.io/v3/nfl/scores/json/Player/22493?key=${key}`).then(res => {
+    let playerId = Math.floor(Math.random() * 20000) + 10000
+    axios.get(`https://api.sportsdata.io/v3/nfl/scores/json/Player/${playerId}?key=${key}`).then(res => {
       // console.log(res)
       setPlayer(res.data)
       console.log(res.data)

@@ -7,28 +7,17 @@ function App() {
 
   const [player, setPlayer] = useState([])
   const [error, setError] = useState([])
+  const [players, setPlayers] = useState([])
   // const [playerId, setPlayerId] = useState([])
   let key = '841c2605c6da4040a45c4de11797f56b';
 
-  const handleClick = () => {
-    let playerId = Math.floor(Math.random() * 20000) + 10000
-    axios.get(`https://api.sportsdata.io/v3/nfl/scores/json/Player/${playerId}?key=${key}`).then(res => {
-      // console.log(res)
-      setPlayer(res.data)
-      console.log(res.data)
-    }).catch(err => {
-      setError(err)
-    })
-  }
+  axios.get(`https://api.sportsdata.io/v3/nfl/scores/json/Players?key=${key}`).then(res => {
+      setPlayers(res.data)
+  })
 
-  // useEffect(() => {
-  //   axios.get(`https://api.sportsdata.io/v3/nfl/scores/json/Players/SF?key=${key}`).then(res => {
-  //     console.log(res.data)
-  //     setPlayer(res.data)
-  //   }).catch(err => {
-  //     setError(err)
-  //   })
-  // }, [])
+  const handleClick = () => {
+    setPlayer(players[Math.floor(Math.random()*players.length)])
+  }
 
   return (
     <div className='mx-auto w-96'>
